@@ -1,0 +1,104 @@
+{% load static %} 
+
+{% include 'head.html' %}
+
+{% block content %} 
+
+     <div class="wrapper1">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h4>Filters</h4>
+            </div>
+             <div class="container">
+                <form method="GET" action="{% url 'filter' %}">
+                    <div class="form-row">
+                        <div class="form-group sm-10 col-sm-10">
+                            <div class="input-group">
+                                <input class="form-control py-2 border-right-0 border" type="search" name="title_contains" placeholder="Title contains..." />
+                                <span class="input-group-append">
+                                    <div class="input-group-text bg-transparent">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+
+                            <div class="form-group sm-10 col-sm-10">
+                            <label for="financialcoverage">Financial Coverage</label>
+                                <div class="input-group">
+                                     <select id="category" class="form-control " name="financialcoverage">
+                                        <option selected>Choose...</option>
+                                            <option value="Fully Funded">Fully Funded</option>
+                                            <option value="Partial Funded">Partial Funded</option>
+                                        </select>
+                                </div>
+                            </div>
+                           
+                            <div class="form-group sm-10 col-sm-10">
+                            <label for="deadline">Deadline</label>
+                                <div class="input-group">
+
+                                     <select id="deadline" class="form-control" name="deadline1">
+                                        
+                                        
+                                        <option select>Choose...</option>
+                                            
+                                            <option name="deadline1" value="{{queryset}}">1 week left</option>
+                                            {% comment %} <option name="deadline2" value="{{queryset}}">2 weeks left</option>  {% endcomment %}
+                                        </select>
+                                </div>
+                            </div>
+                 <div class="form-row">
+                    <div class="form-group col-sm-10 col-sm-10">
+                        <label for="publishDateMin">Publish date minimum</label>
+                        <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                    </div>
+                    <div class="form-group col-sm-10 col-sm-10">
+                        <label for="publishDateMax">Publish date maximum</label>
+                        <input type="date" class="form-control" id="publishDateMax" name="date_max">
+                    </div>
+
+                    <div class="form-group col-sm-10">
+                        <label for="field">Field of studies</label>
+
+                        <select id="field" class="form-control" name="field">
+                        
+                        
+                        <option selected>Choose...</option> 
+                        {% comment %} {% for o in fieldofstudies %} {% endcomment %}
+                        
+                        <option value="Phd">Phd</option>
+                        <option value="Masters">Masters</option>
+                        <option value="Undergraduate">Undergraduate</option>
+                          
+                        {% comment %} {% endfor %} {% endcomment %}
+
+                        </select>
+                    </div>
+
+                 </div>
+                </div>
+                <div>
+                 <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                </div>
+        </nav>
+    
+    
+    
+
+        {% include "scripts.html" %}
+
+        <script type="text/javascript">
+         $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+         });
+        </script>
+        
+  
+    
+
+{% endblock %} 

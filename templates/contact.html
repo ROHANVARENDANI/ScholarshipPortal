@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %} 
+  <head>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+        $teal:#00b4cf;
+        $white:#ffffff;
+
+         * {
+          box-sizing:border-box;
+          margin:0;
+        } 
+
+        .body1 {
+        	background: #ffffff;
+        	display: flex;
+        	justify-content: center;
+        	align-items: center;
+        	flex-direction: column;
+        	font-family: 'Montserrat', sans-serif;
+          font-size:10px;
+        	height: 100vh;
+        	margin: -20px 0 50px;
+        }
+
+        .container2 {
+        	background-color: #add8e6;
+        	border-radius: 10px;
+          box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+        			0 10px 10px rgba(0,0,0,0.22);
+        	position: relative;
+        	overflow: hidden;
+        	width: 768px;
+        	max-width: 100%;
+        	min-height: 550px;
+          min-width:500px;
+        }
+
+        h2 {
+          font-size:2rem;
+          margin-bottom:1rem;
+        }
+        .form-container1 {
+          display:flex;
+        }
+
+        .left-container1 {
+          flex:1;
+          height:480px;
+          background-color:$teal;
+        }
+        .right-container1 {
+          display:flex;
+          flex:1;
+          height:460px;
+          background-color: $white;
+          justify-content:center;
+          align-items:center;
+        }
+
+        .left-container1 {
+          display:flex;
+          flex:1;
+          height:480px;
+          justify-content:center;
+          align-items:center;
+          color:$white;
+        }
+
+        .left-container p1 {
+          font-size:0.9rem;
+        }
+
+        .right-inner-container1 {
+          width:70%;
+          height:80%;
+          text-align:center;
+        }
+
+        .left-inner-container1 {
+          height:50%;
+          width:80%;
+          text-align:center;
+          line-height:22px;
+        }
+
+        input, textarea {
+        	background-color: #eee;
+        	border: none;
+        	padding: 12px 15px;
+        	margin: 8px 0;
+        	width: 100%;
+          font-size:0.9rem;
+        }
+
+        input:focus, textarea:focus{
+          outline:1px solid $teal;
+        }
+
+        button {
+        	border-radius: 20px;
+        	border: 1px solid #00b4cf;
+        	background-color: #00b4cf;
+        	color: #FFFFFF;
+        	font-size: 12px;
+        	font-weight: bold;
+        	/* padding: 12px 45px; */
+        	letter-spacing: 1px;
+        	text-transform: uppercase;
+        	transition: transform 80ms ease-in;
+          cursor:pointer;
+        }
+
+        button:hover {
+          opacity:0.7;
+        }
+        @media only screen and (max-width: 600px) {
+          .left-container{
+            display: none;
+          }
+          .lg-view {
+            display:none;
+          }
+        }
+
+        @media only screen and (min-width: 600px) {
+          .sm-view {
+            display:none;
+          }
+        }
+
+        form p {
+          text-align:left;
+        }
+    </style>
+    </head>
+  <body>
+    <div class="body1">
+    {% if message_name %}
+      <center>
+        <h2>Thanks {{ message_name }}! </h2>
+        <h4> We will contact you soon!</h4>
+      </center> 
+
+      {% endif %}
+      <div class="container2">
+        <div class="form-container1">
+          <div class="left-container1">
+            <div class="left-inner-container1">
+            <h2>Let's Chat</h2>
+            <h6>Whether you have a question, want to ask about anything           simply want to connect.</h6>
+              <br>
+              <h6>Feel free to send me a message in the contact form</h6>
+          </div>
+            </div>
+          <div class="right-container1">
+            <div class="right-inner-container1">
+              <form action="{% url 'contact' %}" method="POST">
+              {% csrf_token %}
+      			<h2 class="lg-view">Contact</h2>
+            <h2 class="sm-view">Let's Chat </h2>
+      			<div class="social-container">
+      				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+      				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+      				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+      			</div>
+            <input type="text" placeholder="Name *" name='message-name'  />
+            <input type="email" placeholder="Email *" name='message-email' />
+            <input type="subject" placeholder="Subject" name = 'message-subject'/>
+                <textarea  name='message' rows="6" placeholder="Message"></textarea>
+      			<button>Submit</button>
+      		</form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
